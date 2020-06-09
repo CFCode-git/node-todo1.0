@@ -3,7 +3,7 @@ const _fs = jest.requireActual('fs') /*真正的fs*/
 
 Object.assign(fs, _fs)/*将真正的 fs 身上的所有东西复制给假的 fs */
 
-const readMocks = {}
+let readMocks = {}
 fs.setReadFileMock = (path, error, data) => {
   readMocks[path] = [error, data]
 }
@@ -18,7 +18,7 @@ fs.readFile = (path, options, callback) => {
   }
 }
 
-const writeMocks = {}
+let writeMocks = {}
 fs.setWriteFileMock = (path, fn)=> {
   writeMocks[path] = fn
 }
@@ -32,5 +32,10 @@ fs.writeFile = (path, data, options, callback) => {
   }
 }
 
+/* 清除 Mocks */
+fs.clearMocks = ()=>{
+  readMocks = {}
+  writeMocks = {}
+}
 
 module.exports = fs
