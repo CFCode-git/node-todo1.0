@@ -16,7 +16,6 @@ const db = {
           list = []
         }
         resolve(list)
-
       })
     })
   },
